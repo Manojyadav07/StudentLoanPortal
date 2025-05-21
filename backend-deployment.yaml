@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slp-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: slp-backend
+  template:
+    metadata:
+      labels:
+        app: slp-backend
+    spec:
+      containers:
+        - name: backend
+          image: manoj/student-loan-portal-backend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              value: mysql
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password

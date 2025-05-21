@@ -1,0 +1,7 @@
+CREATE TABLE student (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  dob DATE,
+  email VARCHAR(255) UNIQUE,
+  loan_amount DECIMAL(10,2)
+);
